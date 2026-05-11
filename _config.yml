@@ -1,0 +1,39 @@
+title: ChaseMonsterAway's Blog
+description: A Jekyll blog powered by GitHub Pages with tree navigation.
+author: ChaseMonsterAway
+email: your-email@example.com
+
+url: "https://chasemonsteraway.github.io"
+baseurl: ""
+
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:year/:month/:day/:title/
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+theme: null

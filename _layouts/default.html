@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | default: site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% seo %}
+</head>
+<body>
+  <div class="wrapper">
+    <aside class="sidebar">
+      <div class="site-header">
+        <a href="{{ '/' | relative_url }}" class="site-title">{{ site.title }}</a>
+        <p class="site-desc">{{ site.description }}</p>
+      </div>
+      {% include tree.html %}
+    </aside>
+    <main class="content">
+      {{ content }}
+    </main>
+  </div>
+  <script src="{{ '/assets/js/tree.js' | relative_url }}"></script>
+</body>
+</html>

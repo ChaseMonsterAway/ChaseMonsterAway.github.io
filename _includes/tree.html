@@ -1,0 +1,74 @@
+<nav class="tree-nav">
+  <ul class="tree-root">
+    <li class="tree-item">
+      <a href="{{ '/' | relative_url }}" class="tree-link{% if page.url == '/' %} active{% endif %}">
+        <span class="tree-icon">🏠</span> 首页
+      </a>
+    </li>
+    <li class="tree-item">
+      <a href="{{ '/about/' | relative_url }}" class="tree-link{% if page.url == '/about/' %} active{% endif %}">
+        <span class="tree-icon">👤</span> 关于
+      </a>
+    </li>
+
+    {% comment %}
+      构建分类树：按 category 分组文章
+    {% endcomment %}
+    {% assign all_categories = "" | split: "" %}
+    {% for post in site.posts %}
+      {% for cat in post.categories %}
+        {% unless all_categories contains cat %}
+          {% assign all_categories = all_categories | push: cat %}
+        {% endunless %}
+      {% endfor %}
+    {% endfor %}
+
+    {% if site.posts.size > 0 %}
+    <li class="tree-item has-children">
+      <button class="tree-toggle" aria-expanded="false">
+        <span class="toggle-icon">▶</span>
+        <span class="tree-icon">📝</span> 文章
+      </button>
+      <ul class="tree-children">
+        {% for post in site.posts %}
+        <li class="tree-item">
+          <a href="{{ post.url | relative_url }}" class="tree-link{% if page.url == post.url %} active{% endif %}">
+            <span class="tree-icon">📄</span> {{ post.title }}
+          </a>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+
+    {% if all_categories.size > 0 %}
+    <li class="tree-item has-children">
+      <button class="tree-toggle" aria-expanded="false">
+        <span class="toggle-icon">▶</span>
+        <span class="tree-icon">📁</span> 分类
+      </button>
+      <ul class="tree-children">
+        {% for cat in all_categories %}
+        <li class="tree-item has-children">
+          <button class="tree-toggle" aria-expanded="false">
+            <span class="toggle-icon">▶</span>
+            <span class="tree-icon">📂</span> {{ cat }}
+          </button>
+          <ul class="tree-children">
+            {% for post in site.posts %}
+              {% if post.categories contains cat %}
+            <li class="tree-item">
+              <a href="{{ post.url | relative_url }}" class="tree-link{% if page.url == post.url %} active{% endif %}">
+                <span class="tree-icon">📄</span> {{ post.title }}
+              </a>
+            </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
