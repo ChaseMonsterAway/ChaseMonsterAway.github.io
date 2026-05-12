@@ -1,0 +1,27 @@
+# 本地模板文件（不上传）
+template.md
+
+# Jekyll 生成文件
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Ruby / Bundler
+.bundle/
+vendor/
+Gemfile.lock
+
+# IDE / 编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS 文件
+.DS_Store
+Thumbs.db
+
+# 日志
+*.log
